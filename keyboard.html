@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.js"></script>
+        <style>
+            #container {
+                position:absolute;
+                height:200px;
+                border:5px solid black;
+                top:calc(50% - 100px);
+                left:calc(50% - 350px);
+                overflow:hidden;
+            }
+            .whitenote {
+                height:100%;
+                width:50px;
+                background:white;
+                float:left;
+                border-right:1px solid black;
+                position:relative;
+            }
+            .blacknote {
+                position:absolute;
+                height:65%;
+                width:55%;
+                z-index:1;
+                background:#777;
+                left:70%;
+            }
+        </style>
+    </head>
+    <body>
+        <div id='container'>
+        </div>
+        <script>
+            var synth = new Tone.PolySynth().toMaster();
+            var notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+            var html = "";
+            for (var octave = 0; octave < 2; octave ++) {
+                for ( var i = 0; i < notes.length; i++ ) {
+                    var isSharp = true;
+                    var note = notes[i];
+                    if (note === 'E' || note === 'B') isSharp = false;
+                    html += "<div class='whitenote' onmousedown='noteDown(this, false)' onmouseup='noteUp(this, false)' onmouseleave='noteUp(this, false)' data-note=" + note + (octave + 4) + ">";
+                    if (isSharp) {
+                        html += "<div class='blacknote' onmousedown='noteDown(this, true)' onmouseup='noteUp(this, true)' onmouseleave='noteUp(this, true)' data-note=" + note + "#" + (octave + 4) + "></div>";
+                    }
+                    html += "</div>";
+                }
+              };   
+            document.getElementById('container').innerHTML = html;
+
+            function noteUp (element, isSharp) {
+                element.style.background = isSharp ? '#777' : 'white';
+            }
+
+            function noteDown (element, isSharp) {
+                var note = element.dataset.note;
+                // alert(note);
+                element.style.background = isSharp ? 'black' : '#ccc';
+                synth.triggerAttackRelease(note, "16n");
+                event.stopPropagation();
+            }
+        </script>
+    </body>
+</html>

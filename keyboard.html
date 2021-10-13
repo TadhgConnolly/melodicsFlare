@@ -3,20 +3,29 @@
     <head>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.js"></script>
         <style>
+            #logo {
+                display: block;
+                margin-left:auto;
+                margin-right:auto;
+                overflow:hidden;   
+                height:300px;
+            }
             #container {
                 position:absolute;
                 height:200px;
-                border:5px solid black;
-                top:calc(50% - 100px);
+                border:3px solid black;
+                border-top:5px solid black;
+                top:calc(50% - 50px);
                 left:calc(50% - 350px);
                 overflow:hidden;
             }
             .whitenote {
                 height:100%;
                 width:50px;
-                background:white;
+                background:#ffcc00;
                 float:left;
-                border-right:1px solid black;
+                border-right:2px solid black;
+                border-left:2px solid black;
                 position:relative;
             }
             .blacknote {
@@ -24,16 +33,17 @@
                 height:65%;
                 width:55%;
                 z-index:1;
-                background:#777;
+                background:#2F2F2F;
                 left:70%;
             }
         </style>
     </head>
     <body>
+        <img src="https://melodics.com/img/content/branding/main-logo.png" id='logo' >
         <div id='container'>
         </div>
         <script>
-            var synth = new Tone.PolySynth().toMaster();
+            var synth = new Tone.PolySynth().toDestination();
             var notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
             var html = "";
             for (var octave = 0; octave < 2; octave ++) {
@@ -41,9 +51,9 @@
                     var isSharp = true;
                     var note = notes[i];
                     if (note === 'E' || note === 'B') isSharp = false;
-                    html += "<div class='whitenote' onmousedown='noteDown(this, false)' onmouseup='noteUp(this, false)' onmouseleave='noteUp(this, false)' data-note=" + note + (octave + 4) + ">";
+                    html += "<div class='whitenote' onmousedown='noteDown(this, false)' onmouseup='noteUp(this, false)' onmouseleave='noteUp(this, false)' data-note=" + note + (octave + 3) + ">";
                     if (isSharp) {
-                        html += "<div class='blacknote' onmousedown='noteDown(this, true)' onmouseup='noteUp(this, true)' onmouseleave='noteUp(this, true)' data-note=" + note + "#" + (octave + 4) + "></div>";
+                        html += "<div class='blacknote' onmousedown='noteDown(this, true)' onmouseup='noteUp(this, true)' onmouseleave='noteUp(this, true)' data-note=" + note + "#" + (octave + 3) + "></div>";
                     }
                     html += "</div>";
                 }
@@ -51,13 +61,13 @@
             document.getElementById('container').innerHTML = html;
 
             function noteUp (element, isSharp) {
-                element.style.background = isSharp ? '#777' : 'white';
+                element.style.background = isSharp ? '#2F2F2F' : '#ffcc00';
             }
 
             function noteDown (element, isSharp) {
                 var note = element.dataset.note;
                 // alert(note);
-                element.style.background = isSharp ? 'black' : '#ccc';
+                element.style.background = isSharp ? '#191919' : '#e6ba09';
                 synth.triggerAttackRelease(note, "16n");
                 event.stopPropagation();
             }

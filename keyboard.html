@@ -36,9 +36,21 @@
                 background:#2F2F2F;
                 left:70%;
             }
+            footer {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                margin: 10px;
+                width: 100%;
+                color: black;
+                text-align: center;
+                }
             @media(max-height: 550px){
                 #logo {
                     height:0px;
+                }
+                footer {
+                    display:none;
                 }
             }
         </style>
@@ -47,6 +59,10 @@
         <img src="https://melodics.com/img/content/branding/main-logo.png" id='logo' >
         <div id='container'>
         </div>
+        <footer>
+            <p>This project is in no way affiliated with Melodics <br> It was built as a learning exercise, and to start a conversation</p>
+            <a href="https://github.com/TadhgConnolly">Check out my GitHub</a>
+        </footer>
         <script>
             var synth = new Tone.PolySynth().toDestination();
             var notes = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];

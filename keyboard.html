@@ -22,7 +22,7 @@
             .whitenote {
                 height:100%;
                 width:50px;
-                background:#ffcc00;
+                background:#46E2EA;
                 float:left;
                 border-right:2px solid black;
                 border-left:2px solid black;
@@ -33,7 +33,7 @@
                 height:65%;
                 width:55%;
                 z-index:1;
-                background:#2F2F2F;
+                background:#9C00E6;
                 left:70%;
             }
             footer {
@@ -56,11 +56,10 @@
         </style>
     </head>
     <body>
-        <img src="https://melodics.com/img/content/branding/main-logo.png" id='logo' >
         <div id='container'>
         </div>
         <footer>
-            <p>This project is in no way affiliated with Melodics <br> It was built as a learning exercise, and to start a conversation</p>
+            <p>Built by Tadhg</p>
             <a href="https://github.com/TadhgConnolly">Check out my GitHub</a>
         </footer>
         <script>
@@ -82,13 +81,13 @@
             document.getElementById('container').innerHTML = html;
 
             function noteUp (element, isSharp) {
-                element.style.background = isSharp ? '#2F2F2F' : '#ffcc00';
+                element.style.background = isSharp ? '#9C00E6' : '#46E2EA';
             }
 
             function noteDown (element, isSharp) {
                 var note = element.dataset.note;
                 // alert(note);
-                element.style.background = isSharp ? '#191919' : '#e6ba09';
+                element.style.background = isSharp ? '#7D00B8' : '#00AAB3';
                 synth.triggerAttackRelease(note, "16n");
                 event.stopPropagation();
             }
